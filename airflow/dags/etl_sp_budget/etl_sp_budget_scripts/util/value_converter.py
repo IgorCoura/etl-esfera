@@ -1,4 +1,4 @@
-from models.result import Result
+from etl_sp_budget.etl_sp_budget_scripts.models.result import Result
 
 
 class ValueConverter:

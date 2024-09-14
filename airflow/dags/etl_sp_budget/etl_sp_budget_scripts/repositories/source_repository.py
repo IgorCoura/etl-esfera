@@ -1,5 +1,5 @@
-from models.source import Source
-from repositories.repository import Repository
+from etl_sp_budget.etl_sp_budget_scripts.models.source import Source
+from etl_sp_budget.etl_sp_budget_scripts.repositories.repository import Repository
 
 
 class SourceRepository(Repository):

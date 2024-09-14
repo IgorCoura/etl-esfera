@@ -1,5 +1,6 @@
-from models.result import Result
+from etl_sp_budget.etl_sp_budget_scripts.models.result import Result
 import re
+import json
 
 class Category:
     def __init__(self, id, name, parent_category) -> None:
@@ -22,3 +23,21 @@ class Category:
         if(index >= len_array - 1): 
             return category
         return Category.create_category(categories_array, index+1, category)
+    
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "parent_category": self.parent_category.to_dict() if self.parent_category else None
+        }
+
+    def from_dict(data):
+        parent_category = Category.from_dict(data["parent_category"]) if data["parent_category"] else None
+        return Category(data["id"], data["name"], parent_category)
+    
+    def to_json(self):
+        return json.dumps(self.to_dict())
+
+    def from_json(json_str):
+        data = json.loads(json_str)
+        return Category.from_dict(data)
