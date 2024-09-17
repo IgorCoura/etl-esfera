@@ -13,7 +13,7 @@ class CategoryRepository(Repository):
             parent_category_id = category.parent_category.id
             
         result = super().update(
-         query="INSERT INTO categories (name, parent_category_id) VALUES (%s, %s) ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name RETURNING id;",
+         query="INSERT INTO categories (name, parent_category_id) VALUES (%s, %s) ON CONFLICT (name, parent_category_id) DO NOTHING RETURNING id;",
          params=(name, parent_category_id)
         ) 
         return result[0]

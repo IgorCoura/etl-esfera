@@ -7,9 +7,10 @@ CREATE_TABLES = """
 
     CREATE TABLE IF NOT EXISTS categories (
         id SERIAL PRIMARY KEY NOT NULL,
-        name VARCHAR(250) NOT NULL UNIQUE,
+        name VARCHAR(250) NOT NULL,
         parent_category_id INTEGER,
-        FOREIGN KEY (parent_category_id) REFERENCES categories(id)
+        FOREIGN KEY (parent_category_id) REFERENCES categories(id),
+        CONSTRAINT unique_name_parent_category UNIQUE (name, parent_category_id)
     );
 
     CREATE TABLE IF NOT EXISTS resources(
@@ -24,3 +25,4 @@ CREATE_TABLES = """
     );
 
 """
+
